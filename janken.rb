@@ -20,7 +20,7 @@ def janken
     puts "あなた:パーを出しました"
   when 3
     puts "あっち向いてホイを終了します"
-    return
+    exit
   else
     puts "0~3までの数字を入力してください"
     puts "----------------"
@@ -43,12 +43,20 @@ def janken
     return true
   end
 
-
   if player_hand == program_hand
     puts "あいこで..."
+    janken
     return true
+  elsif(player_hand == 0 && program_hand == 1)||(player_hand == 1 && program_hand == 2)||(player_hand == 2 && program_hand == 0)
+    puts "あなたの勝ちですjanken"
+    directions
+  else
+    puts "あなたの負け!janken"
+    result_lose
   end
 end
+
+
 
 next_game = true
 
@@ -56,52 +64,64 @@ while next_game
   next_game = janken
 end
 
-#あっち向いてホイ
-def direction
-  puts "あっち向いて〜"
-  puts "0(上)1(右)2(左)3(右)"
+#あっち向いてホイlose
+def result_lose
+  puts "あっち向いて〜lose"
+  puts "0(上)1(下)2(左)3(右)"
 
-  player_direction = gets.to_i
-  program_direction = rand(0..3)
+  player_face = gets.to_i
+  program_points = rand(0..3)
   
+  direction = ["上","下","左","右"]
+
   puts "ホイ！" 
-  puts "-------------"
+  puts "--------------------"
+  puts "あなた:#{direction[player_face]}"
+  puts "相手:#{direction[program_points]}"
+  puts "--------------------"
+
+  if player_face == program_points
+    puts "あなたの負け！あっち"
+  elsif 
+    puts "引き分け〜..."
+    janken
+  end  
+end
+
+
+#あっち向いてホイwin
+def directions
+  puts "あっち向いて〜win"
+  puts "0(上)1(下)2(左)3(右)"
+
+  player_points = gets.to_i
+  program_face = rand(0..3)
   
-  case player_direction
-  when 0
-    puts "あなた:上"
-  when 1
-    puts "あなた:下"
-  when 2
-    puts "あなた:左"
-  when 3
-    puts "あなた:右"
-  else
-    puts "0~3までの数字を入力してください"
-  end
+  direction = ["上","下","左","右"]
 
-  case program_direction
-  when 0
-    puts "相手:上"
-  when 1
-    puts "相手:下"
-  when 2
-    puts "相手:左"
-  when 3
-    puts "相手:右"
-  else
-    puts "0~3までの数字を入力してください"
-  end
-  puts "------------------"
+  puts "ホイ！" 
+  puts "--------------------"
+  puts "あなた:#{direction[player_points]}"
+  puts "相手:#{direction[program_face]}"
+  puts "--------------------"
+ 
 
-  if player_direction != program_direction
-    return true
+  if player_points == program_face
+    puts "あなたの勝ち！hoi"
+    return false
   else
-    puts "引き分け!また挑戦してください"  
+    puts "じゃんけん~~..."
+    janken
+    return false 
   end
 end
 
+
+
+
+
+
 next_game = true
 
-while next_game = direction
+while next_game = directions
 end
