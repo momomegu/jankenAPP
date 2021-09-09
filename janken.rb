@@ -6,7 +6,6 @@ def janken
   player_hand = gets.to_i
   #３までの乱数
   program_hand = rand(0..2)
-  jankens = ["グー","チョキ","パー"]
 
   puts "ホイ！"
   puts "--------------"
@@ -58,11 +57,6 @@ end
 
 
 
-next_game = true
-
-while next_game
-  next_game = janken
-end
 
 #あっち向いてホイlose
 def result_lose
@@ -83,8 +77,9 @@ def result_lose
   if player_face == program_points
     puts "あなたの負け！あっち"
   elsif 
-    puts "引き分け〜..."
+    puts "引き分け!じゃんけん..."
     janken
+    return true
   end  
 end
 
@@ -118,10 +113,8 @@ end
 
 
 
-
-
-
 next_game = true
 
-while next_game = directions
+while next_game
+  next_game  = janken
 end
